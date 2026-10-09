@@ -1,5 +1,5 @@
 /* Bump CACHE on every deploy so phones fetch the new files. */
-const CACHE = "fukuoka-202610080535";
+const CACHE = "fukuoka-202610091000";
 const FILES = ["./", "index.html", "leaflet.min.js", "tiles.json", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-180.png"];
 
 self.addEventListener("install", (e) => {
