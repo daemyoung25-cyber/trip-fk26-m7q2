@@ -232,6 +232,10 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .must { margin: 0 0 .8rem; padding: .6rem .75rem; background: var(--wash); border-left: 3px solid var(--indigo); border-radius: 8px; font-size: .84rem; line-height: 1.65; color: var(--ink); }
+  .must-k { display: inline-block; min-width: 3.4rem; font-size: .72rem; font-weight: 700; color: var(--indigo); }
+  .must-k.may { color: var(--ink-3); }
+
   .items {
     list-style: none;
     margin: 0;
@@ -1374,6 +1378,7 @@
           <p class="date">10.14 &nbsp;수 &middot; 유후인 1박</p>
         </div>
       </div>
+      <p class="must" contenteditable="true"><span class="must-k">오늘 꼭</span> 08:55 비행기 &middot; 11:00 렌터카 인수 &middot; 유후인 숙소 도착<br><span class="must-k may">남으면</span> 유노츠보 거리 &middot; 킨린코 호수</p>
       <ul class="items">
         <li class="item">
           <button class="tick" type="button" aria-pressed="false" aria-label="완료 표시"></button>
@@ -1528,6 +1533,7 @@
           <p class="date">10.15 &nbsp;목 &middot; 렌터카 반납일</p>
         </div>
       </div>
+      <p class="must" contenteditable="true"><span class="must-k">오늘 꼭</span> 아프리칸 사파리 &middot; 진격의 거인 본관(목요일 16:00 마감) &middot; <b>19:00 렌터카 반납</b><br><span class="must-k may">남으면</span> 히타 카페 &middot; 리바이 동상 &middot; ANNEX (이 순서로 빼기)</p>
       <ul class="items">
         <li class="item">
           <button class="tick" type="button" aria-pressed="false" aria-label="완료 표시"></button>
@@ -1694,6 +1700,7 @@
           <p class="date">10.16 &nbsp;금</p>
         </div>
       </div>
+      <p class="must" contenteditable="true"><span class="must-k">오늘 꼭</span> 마린월드 &middot; 위스키 住吉酒販(일요일 휴무라 오늘뿐)<br><span class="must-k may">남으면</span> 스탠다드 프로덕트 &middot; 텐진 산책 &middot; 샴 드 뱅 &middot; 건담 밤 연출 &middot; 칼디</p>
       <ul class="items">
         <li class="item">
           <button class="tick" type="button" aria-pressed="false" aria-label="완료 표시"></button>
@@ -1881,6 +1888,7 @@
           <p class="date">10.17 &nbsp;토</p>
         </div>
       </div>
+      <p class="must" contenteditable="true"><span class="must-k">오늘 꼭</span> 보스 이조 &middot; <b>18:30 이소노상점 예약</b><br><span class="must-k may">남으면</span> 오호리 공원 &middot; 성터 &middot; 텐진 쇼핑 &middot; 후쿠오카 타워 &middot; 야타이</p>
       <ul class="items">
         <li class="item">
           <button class="tick" type="button" aria-pressed="false" aria-label="완료 표시"></button>
@@ -2034,6 +2042,7 @@
           <p class="date">10.18 &nbsp;일</p>
         </div>
       </div>
+      <p class="must" contenteditable="true"><span class="must-k">오늘 꼭</span> <b>13:30 짐 찾기 &middot; 14:00 공항 출발</b> (16:55 비행기)<br><span class="must-k may">남으면</span> 구시다 신사 &middot; 캐널시티 ASICS &middot; 몽벨 &middot; 하카타역 쇼핑</p>
       <ul class="items">
         <li class="item">
           <button class="tick" type="button" aria-pressed="false" aria-label="완료 표시"></button>
@@ -2650,7 +2659,7 @@
 (function () {
   "use strict";
 
-  var VERSION = "2026-10-14.40";
+  var VERSION = "2026-10-14.41";
   var KEY = "fukuoka-plan";
   var dirty = false;
 
@@ -2866,6 +2875,8 @@
       var date = day.querySelector(".date").textContent.replace(/\s+/g, " ").trim();
 
       out.push("── DAY " + num + " · " + date + " · " + title);
+      var must = day.querySelector(".must");
+      if (must) out.push("  ★ " + must.textContent.replace(/\s+/g, " ").replace(" 남으면", " / 남으면").trim());
 
       day.querySelectorAll(".item").forEach(function (item) {
         var done = item.classList.contains("done") ? "[x] " : "[ ] ";
