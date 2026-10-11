@@ -1064,19 +1064,21 @@
   #app:not([data-view="list"]) .toolbar { display: none; }
   #app[data-view="spend"] .days { display: none; }
 
-  .subnav { display: none; gap: .3rem; overflow-x: auto; scrollbar-width: none; }
-  .subnav::-webkit-scrollbar { display: none; }
-  #app[data-view="info"] .subnav { display: flex; }
+  /* Info tabs wrap into a grid instead of scrolling sideways: 5 per row (2 rows), 4 per row on narrow phones. */
+  .subnav { display: none; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .3rem; }
+  #app[data-view="info"] .subnav { display: grid; }
+  @media (max-width: 22rem) { .subnav { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .subnav button {
     font: inherit;
-    flex: none;
-    font-size: .8rem;
+    min-width: 0;
+    white-space: nowrap;
+    font-size: .78rem;
     font-weight: 600;
     color: var(--ink-2);
     background: var(--card);
     border: 1px solid var(--rule);
     border-radius: 999px;
-    padding: .35rem .8rem;
+    padding: .35rem .2rem;
     min-height: 34px;
     cursor: pointer;
   }
